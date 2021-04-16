@@ -1,4 +1,10 @@
-let input, button, greeting, wrapper, feed;
+let input, button, wrapper, feed;
+let address = "http://192.168.1.134:3000";
+
+// 3 variables importantes !
+// messages
+// players
+// currentPlayer
 
 function setup() {
   cv = createCanvas(windowWidth, windowHeight);
@@ -15,7 +21,7 @@ function setup() {
   input.parent(wrapper);
   input.attribute("placeholder", "Your name");
   button.parent(wrapper);
-  button.mousePressed(greet);
+  button.mousePressed(login);
 }
 
 function draw() {
@@ -27,15 +33,27 @@ function draw() {
       // User logged in!
       messages.forEach((message, i) => {
         //text(message.content, 10, i * 100); // Text wraps within
+
         findExistingBubble = document.getElementById(message.id);
         if (!findExistingBubble) {
-          let bubble = createDiv(message.content)
+          let bubble = createDiv()
             .addClass("bubble")
             .attribute("id", message.id);
 
-          let author = createElement("span", "Nath");
-          // findAuthorById(message.authorId)
+          let bubbleMessage = createDiv(message.content).class("message");
+
+          let author = createElement(
+            "div",
+            message.authorName +
+              "<span class='dateTime'> - " +
+              moment(message.timestamp).fromNow() +
+              "</span>"
+          ).addClass("author");
+
+          bubble.mouseClicked(clickedBubble);
+
           author.parent(bubble);
+          bubbleMessage.parent(bubble);
 
           if (message.authorId === currentPlayer.id) bubble.addClass("author");
           bubble.parent(feed);
@@ -46,7 +64,12 @@ function draw() {
   }
 }
 
-function greet() {
+function clickedBubble() {
+  // Show date on bubble click
+  select(".dateTime", this).style("display", "inline");
+}
+
+function login() {
   const name = input.value();
   input.value("");
 
@@ -62,10 +85,20 @@ function greet() {
 function newMessage() {
   const message = input.value();
   input.value("");
-  sendMessage(message);
+  if (message != "") sendMessage(message);
 }
 
-function mousePressed() {
-  console.log(players);
-  console.log(messages);
+function keyPressed() {
+  // Check if user is logged
+  if (keyCode === ENTER) {
+    if (currentPlayer.name) {
+      newMessage();
+    } else {
+      login();
+    }
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }

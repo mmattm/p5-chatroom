@@ -46,7 +46,13 @@ io.sockets.on("connection", socket => {
     console.log(data);
 
     messages.push(
-      new Message(messages.length, data.timestamp, data.content, data.authorId)
+      new Message(
+        messages.length,
+        data.timestamp,
+        data.content,
+        data.authorId,
+        data.authorName
+      )
     );
   });
 });

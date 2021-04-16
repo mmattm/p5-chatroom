@@ -1,4 +1,4 @@
-const socket = io.connect("http://10.192.234.160:3000");
+const socket = io.connect(address);
 
 let players = [];
 let messages = [];
@@ -39,23 +39,17 @@ function sendMessage(content) {
   const data = {
     timestamp: Date.now(),
     content: content,
-    authorId: currentPlayer.id
+    authorId: currentPlayer.id,
+    authorName: currentPlayer.name
   };
 
   socket.emit("newMessage", data);
 }
 
-function findAuthorById(id) {
-  let foundIndex = players.findIndex(player => player.id === id);
-  return foundIndex ? players[foundIndex].name : null;
-}
-
-function windowResized() {
-  centerCanvas();
-}
-
-function centerCanvas() {
-  const x = (windowWidth - width) / 2;
-  const y = (windowHeight - height) / 2;
-  cv.position(x, y);
-}
+// function findAuthorById(id) {
+//   console.log(id);
+//   console.log(players);
+//   let foundIndex = players.findIndex(player => player.id === id);
+//   console.log(foundIndex);
+//   return foundIndex != -1 ? players[foundIndex].name : null;
+// }
