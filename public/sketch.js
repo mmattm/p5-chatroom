@@ -10,7 +10,7 @@ function setup() {
   feed = document.getElementById("feed");
 
   input = createInput("").id("message");
-  button = createButton("Login");
+  button = createButton("<i class='fas fa-arrow-right'></i>");
 
   input.parent(wrapper);
   input.attribute("placeholder", "Your name");
