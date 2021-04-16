@@ -25,7 +25,6 @@ function draw() {
   if (currentPlayer != null) {
     if (currentPlayer.name) {
       // User logged in!
-
       messages.forEach((message, i) => {
         //text(message.content, 10, i * 100); // Text wraps within
         findExistingBubble = document.getElementById(message.id);
