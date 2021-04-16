@@ -99,7 +99,7 @@ input {
   animation: expand .25s ease-in-out;
 }
 
-.bubble .author {
+.bubble .authorLabel {
   display: block;
   font-size: 1rem;
   color: rgb(119, 119, 119);
@@ -121,7 +121,7 @@ input {
   float: right;
 }
 
-.bubble.author span {
+.bubble.author .authorLabel {
   display: none;
 }
 

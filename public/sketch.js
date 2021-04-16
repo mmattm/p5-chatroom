@@ -48,7 +48,7 @@ function draw() {
               "<span class='dateTime'> - " +
               moment(message.timestamp).fromNow() +
               "</span>"
-          ).addClass("author");
+          ).addClass("authorLabel");
 
           bubble.mouseClicked(clickedBubble);
 
