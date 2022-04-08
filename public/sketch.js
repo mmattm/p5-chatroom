@@ -1,5 +1,5 @@
 let input, button, wrapper, feed;
-let address = "http://192.168.1.134:3000";
+//let address = "http://10.192.234.168:3000";
 
 // 3 variables importantes !
 // messages

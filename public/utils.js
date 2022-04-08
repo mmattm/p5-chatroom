@@ -1,9 +1,9 @@
-const socket = io.connect(address);
+const socket = io.connect();
 
 let players = [];
 let messages = [];
 
-socket.on("heartbeat", data => {
+socket.on("heartbeat", (data) => {
   updatePlayers(data.players);
   updateMessages(data.messages);
 });
@@ -17,7 +17,7 @@ function updatePlayers(serverPlayers) {
     currentPlayer = serverPlayers[serverPlayers.length - 1];
   } else {
     currentPlayer = serverPlayers.find(
-      player => player.id === currentPlayer.id
+      (player) => player.id === currentPlayer.id
     );
   }
 }
@@ -29,7 +29,7 @@ function updateMessages(serverMessages) {
 function updatePlayerName(id, name) {
   const data = {
     id: id,
-    name: name
+    name: name,
   };
 
   socket.emit("updatePlayerName", data);
@@ -40,7 +40,7 @@ function sendMessage(content) {
     timestamp: Date.now(),
     content: content,
     authorId: currentPlayer.id,
-    authorName: currentPlayer.name
+    authorName: currentPlayer.name,
   };
 
   socket.emit("newMessage", data);
